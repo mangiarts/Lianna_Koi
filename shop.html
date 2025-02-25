@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lianna_Koi 254 - Electronics Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8d3e0; /* Light pink background */
+            color: rgb(168, 168, 168);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            position: relative;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        header img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #cart-button {
+            position: fixed;
+            bottom: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            background: #ffb3d9; /* Pastel pink for buttons */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .category-section {
+            margin: 20px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .category-section h2 {
+            margin-bottom: 15px;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding-bottom: 10px;
+            justify-content: center;
+        }
+        .product-card {
+            background: #e6b3e0; /* Soft lavender for product cards */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(255, 20, 147, 0.5);
+            text-align: center;
+            color: #4a2c4a; /* Darker purple for text */
+            min-width: 200px;
+            max-width: 300px;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+        .product-card button {
+            background: rgb(136, 0, 106);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .product-card button:hover {
+            background: #ff80ab; /* Lighter pink for button hover */
+        }
+        #cart-page {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(255, 0, 119);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.596);
+            backdrop-filter: blur(10px);
+            width: 300px;
+            text-align: center;
+        }
+        #cart-page button {
+            display: block;
+            margin: 10px auto;
+        }
+        @media (max-width: 600px) {
+            .product-list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-card {
+                width: auto;
+                min-width: 200px;
+                max-width: 90%;
+            }
+            .category-section {
+                margin: 10px;
+                padding: 10px;
+            }
+            header {
+                font-size: 20px;
+            }
+        }
+        #cart-page button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+        }
+        #cart-page button:first-of-type {
+            background: #25D366;
+            color: white;
+        }
+        #cart-page button:first-of-type:hover {
+            background: #1da851;
+        }
+        #cart-page button:last-of-type {
+            background: #ff0202;
+            color: white;
+        }
+        #cart-page button:last-of-type:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="lianna.jpg" alt="Header Image">
+        
+    </header>
+    
+    <nav>
+        <button id="cart-button" onclick="showCart()">
+            <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
+        </button>
+    </nav>
+    
+    <main>
+        <section id="products">
+            <!-- Products will be dynamically inserted here -->
+        </section>
+    </main>
+    <div id="cart-page">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <button onclick="sendOrder()">Order via WhatsApp</button>
+        <button onclick="hideCart()">Close</button>
+    </div>
+
+    <script>
+        const productsContainer = document.getElementById("products");
+        const cartCount = document.getElementById("cart-count");
+        
+        const products = {
+            "Projectors": [
+                { id: 1, name: "Epson Projector", price: 38000, image: "posts/Epson.jpg" },
+                { id: 2, name: "BenQ Projector", price: 40000, image: "posts/BenQ Projector.jpg" },
+                { id: 3, name: "Optoma Projector", price: 40000, image: "posts/Optoma Projector.jpg" },
+                { id: 4, name: "ViewSonic Projector", price: 450, image: "posts/ViewSonic Projector.jpg" },
+                { id: 5, name: "LG PF50KA Portable Full HD", price: 700, image: "posts/LG PF50KA Portable Full HD.jpg" },
+                { id: 6, name: "Epson Home Cinema 4010", price: 2000, image: "posts/Epson Home Cinema 4010.jpg" }
+            ],
+            "mi-fi-routers": [
+                { id: 1, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
+                { id: 2, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
+                { id: 3, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" }
+            ],
+            "Laptops": [
+                { id: 1, name: "HP 15s", price: 1000, image: "https://via.placeholder.com/200" },
+                { id: 2, name: "Dell Inspiron 15", price: 1200, image: "https://via.placeholder.com/200" },
+                { id: 3, name: "Lenovo IdeaPad 3", price: 900, image: "https://via.placeholder.com/200" }
+            ],
+            "Speakers": [
+                { id: 1, name: "Bose SoundLink Revolve", price: 200, image: "https://via.placeholder.com/200" },
+                { id: 2, name: "JBL Flip 5", price: 150, image: "https://via.placeholder.com/200" },
+                { id: 3, name: "Sony SRS-XB43", price: 180, image: "https://via.placeholder.com/200" }
+            ],
+
+            "Smartphones": [
+                { id: 3, name: "iPhone 13", price: 1000, image: "https://via.placeholder.com/200" },
+                { id: 4, name: "Samsung Galaxy S21", price: 850, image: "https://via.placeholder.com/200" },
+                { id: 5, name: "Google Pixel 6", price: 900, image: "https://via.placeholder.com/200" }
+            ],
+            
+            "Headphones": [
+                { id: 9, name: "Sony WH-1000XM4", price: 350, image: "https://via.placeholder.com/200" },
+                { id: 10, name: "Bose QuietComfort 45", price: 400, image: "https://via.placeholder.com/200" },
+                
+            ],
+            "HDMI": [
+                { id: 11, name: "HDMI 2.0", price: 200, image: "https://via.placeholder.com/200" },
+                { id: 12, name: "HDMI 2.1", price: 250, image: "https://via.placeholder.com/200" },
+                
+            ]
+        };
+
+        let cart = [];
+        function showCart() {
+            document.getElementById('cart-page').style.display = 'block';
+            document.getElementById('cart-items').innerHTML = cart.map(item => `<li>${item.name} - KES ${item.price}</li>`).join('');
+        }
+        function hideCart() {
+            document.getElementById('cart-page').style.display = 'none';
+        }
+        function sendOrder() {
+            let message = "Hey, i would like to order:%0A" + cart.map(item => `${item.name} - KES ${item.price}`).join('%0A');
+            window.open(`https://wa.me/254714456925?text=${message}`, '_blank');
+        }
+
+        function displayProducts() {
+            productsContainer.innerHTML = "";
+            for (const category in products) {
+                const categorySection = document.createElement("div");
+                categorySection.classList.add("category-section");
+                categorySection.innerHTML = `<h2>${category}</h2>`;
+                
+                const productList = document.createElement("div");
+                productList.classList.add("product-list");
+                
+                products[category].forEach(product => {
+                    const productCard = document.createElement("div");
+                    productCard.classList.add("product-card");
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>Price: KES ${product.price}</p>
+                        <button onclick="addToCart(${product.id})">Add to Cart</button>
+                    `;
+                    productList.appendChild(productCard);
+                });
+                
+                categorySection.appendChild(productList);
+                productsContainer.appendChild(categorySection);
+            }
+        }
+
+        function addToCart(productId) {
+            for (const category in products) {
+                const product = products[category].find(p => p.id === productId);
+                if (product) {
+                    cart.push(product);
+                    cartCount.textContent = cart.length;
+                    alert(`${product.name} added to cart!`);
+                    break;
+                }
+            }
+        }
+        
+        displayProducts();
+    </script>
+</body>
+</html>
