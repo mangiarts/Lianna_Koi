@@ -43,25 +43,35 @@
         }
         #cart-button {
             position: fixed;
-            bottom: 20px; /* Adjust as needed */
-            right: 20px; /* Adjust as needed */
-            background: #ffb3d9; /* Pastel pink for buttons */
+            bottom: 25px; /* Adjust as needed */
+            right: 25px; /* Adjust as needed */
+            background: #f5077e; /* Pastel pink for buttons */
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 15px 15px;
             cursor: pointer;
             border-radius: 5px;
+            z-index: 1000; /* Ensure it is above other content */
         }
 
         .category-section {
+            display: none; /* Hide all sections initially */
             margin: 20px;
             padding: 15px;
             background: #2a2a2a;
             border-radius: 10px;
             text-align: center;
+            opacity: 0; /* Start hidden */
+            transform: translateY(-20px); /* Start slightly above */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for opacity and position */
         }
         .category-section h2 {
             margin-bottom: 15px;
+        }
+        .category-section.show {
+            display: block; /* Show the section */
+            opacity: 1; /* Fade in */
+            transform: translateY(0); /* Move to original position */
         }
         .product-list {
             display: grid;
@@ -105,7 +115,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgb(255, 0, 119);
+            background: #000000;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.596);
@@ -136,6 +146,28 @@
                 font-size: 20px;
             }
         }
+        .toast {
+            visibility: hidden; /* Hidden by default */
+            min-width: 250px; /* Minimum width */
+            margin-left: -125px; /* Center the toast */
+            background-color: #ff80ab; /* Black background */
+            color: #fff; /* White text */
+            text-align: center; /* Centered text */
+            border-radius: 2px; /* Rounded corners */
+            padding: 16px; /* Padding */
+            position: fixed; /* Fixed position */
+            z-index: 1000; /* Sit on top */
+            left: 50%; /* Center horizontally */
+            bottom: 30px; /* 30px from the bottom */
+            font-size: 17px; /* Font size */
+            transition: visibility 0s, opacity 0.5s linear; /* Transition for visibility and opacity */
+            opacity: 0; /* Hidden by default */
+        }
+
+        .toast.show {
+            visibility: visible; /* Show the toast */
+            opacity: 1; /* Fade in */
+        }
         #cart-page button {
             display: block;
             margin: 10px auto;
@@ -159,13 +191,46 @@
         #cart-page button:last-of-type:hover {
             background: #cc0000;
         }
+        #category-nav {
+            background: #2a2a2a; /* Dark background for the nav */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            transition: background 0.3s ease; /* Transition for background color */
+        }
+        #category-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #category-nav li {
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s; /* Transition for color and scale */
+        }
+        #category-nav li:hover {
+            color: #ff80ab; /* Change color on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
     </style>
 </head>
 <body>
     <header>
         <img src="lianna.jpg" alt="Header Image">
-        
     </header>
+    
+    <nav id="category-nav">
+        <ul>
+            <li onclick="toggleCategory('Projectors')">Projectors</li>
+            <li onclick="toggleCategory('Speakers')">Speakers</li>
+            <li onclick="toggleCategory('Smartphones')">Smartphones</li>
+            <li onclick="toggleCategory('Laptops')">Laptops</li>
+            <li onclick="toggleCategory('Headphones')">Headphones</li>
+            <li onclick="toggleCategory('HDMI')">HDMI</li>
+        </ul>
+    </nav>
     
     <nav>
         <button id="cart-button" onclick="showCart()">
@@ -178,113 +243,156 @@
             <!-- Products will be dynamically inserted here -->
         </section>
     </main>
+    <div id="toast" class="toast">Item added to cart!</div>
+
+    
     <div id="cart-page">
         <h2>Your Cart</h2>
         <ul id="cart-items"></ul>
         <button onclick="sendOrder()">Order via WhatsApp</button>
         <button onclick="hideCart()">Close</button>
     </div>
-
-    <script>
-        const productsContainer = document.getElementById("products");
-        const cartCount = document.getElementById("cart-count");
+      <script>
+          const productsContainer = document.getElementById("products");
+          const cartCount = document.getElementById("cart-count");
         
-        const products = {
-            "Projectors": [
-                { id: 1, name: "Epson Projector", price: 38000, image: "posts/Epson.jpg" },
-                { id: 2, name: "BenQ Projector", price: 40000, image: "posts/BenQ Projector.jpg" },
-                { id: 3, name: "Optoma Projector", price: 40000, image: "posts/Optoma Projector.jpg" },
-                { id: 4, name: "ViewSonic Projector", price: 45000, image: "posts/ViewSonic Projector.jpg" },
-                { id: 5, name: "LG PF50KA Portable Full HD", price: 45000, image: "posts/LG PF50KA Portable Full HD.jpg" },
-                { id: 6, name: "Epson Home Cinema 4010", price: 45000, image: "posts/Epson Home Cinema 4010.jpg" }
-            ],
-            "mi-fi-routers": [
-                { id: 1, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
-                { id: 2, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
-                { id: 3, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" }
-            ],
-            "Laptops": [
-                { id: 1, name: "HP EliteBook", price: 29999, image: "posts/HP EliteBook 840 G6 8th Gen Intel Core i5-8365U 24GB RAM 256GB SSD 14″ Ultra Slim Laptop @ 29,999 only.jpg" },
-                { id: 2, name: "Dell Inspiron 15", price: 1200, image: "https://via.placeholder.com/200" },
-                { id: 3, name: "Lenovo IdeaPad 3", price: 900, image: "https://via.placeholder.com/200" }
-            ],
-            "Speakers": [
-                { id: 1, name: "Bose SoundLink Revolve", price: 200, image: "https://via.placeholder.com/200" },
-                { id: 2, name: "JBL Flip 5", price: 150, image: "https://via.placeholder.com/200" },
-                { id: 3, name: "Sony SRS-XB43", price: 180, image: "https://via.placeholder.com/200" }
-            ],
+          const products = {
+              "Projectors": [
+                  { id: 1, name: "Epson Projector", price: 38000, image: "posts/Epson.jpg" },
+                  { id: 2, name: "BenQ Projector", price: 40000, image: "posts/BenQ Projector.jpg" },
+                  { id: 3, name: "Optoma Projector", price: 40000, image: "posts/Optoma Projector.jpg" },
+                  { id: 4, name: "ViewSonic Projector", price: 45000, image: "posts/ViewSonic Projector.jpg" },
+                  { id: 5, name: "LG PF50KA Portable Full HD", price: 45000, image: "posts/LG PF50KA Portable Full HD.jpg" },
+                  { id: 6, name: "Epson Home Cinema 4010", price: 45000, image: "posts/Epson Home Cinema 4010.jpg" }
+              ],
+              "mi-fi-routers": [
+                  { id: 1, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
+                  { id: 2, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
+                  { id: 3, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" }
+              ],
+              "Laptops": [
+                  { id: 1, name: "HP EliteBook", price: 29999, image: "posts/HP EliteBook 840 G6 8th Gen Intel Core i5-8365U 24GB RAM 256GB SSD 14″ Ultra Slim Laptop @ 29,999 only.jpg" },
+                  { id: 2, name: "Dell Inspiron 15", price: 1200, image: "https://via.placeholder.com/200" },
+                  { id: 3, name: "Lenovo IdeaPad 3", price: 900, image: "https://via.placeholder.com/200" }
+              ],
+              "Speakers": [
+                  { id: 1, name: "Bose SoundLink Revolve", price: 200, image: "https://via.placeholder.com/200" },
+                  { id: 2, name: "JBL Flip 5", price: 150, image: "https://via.placeholder.com/200" },
+                  { id: 3, name: "Sony SRS-XB43", price: 180, image: "https://via.placeholder.com/200" }
+              ],
 
-            "Smartphones": [
-                { id: 3, name: "iPhone 13", price: 1000, image: "https://via.placeholder.com/200" },
-                { id: 4, name: "Samsung Galaxy S21", price: 850, image: "https://via.placeholder.com/200" },
-                { id: 5, name: "Google Pixel 6", price: 900, image: "https://via.placeholder.com/200" }
-            ],
+              "Smartphones": [
+                  { id: 3, name: "iPhone 13", price: 1000, image: "https://via.placeholder.com/200" },
+                  { id: 4, name: "Samsung Galaxy S21", price: 850, image: "https://via.placeholder.com/200" },
+                  { id: 5, name: "Google Pixel 6", price: 900, image: "https://via.placeholder.com/200" }
+              ],
             
-            "Headphones": [
-                { id: 9, name: "Sony WH-1000XM4", price: 350, image: "https://via.placeholder.com/200" },
-                { id: 10, name: "Bose QuietComfort 45", price: 400, image: "https://via.placeholder.com/200" },
+              "Headphones": [
+                  { id: 9, name: "Sony WH-1000XM4", price: 350, image: "https://via.placeholder.com/200" },
+                  { id: 10, name: "Bose QuietComfort 45", price: 400, image: "https://via.placeholder.com/200" },
                 
-            ],
-            "HDMI": [
-                { id: 11, name: "HDMI 2.0", price: 200, image: "https://via.placeholder.com/200" },
-                { id: 12, name: "HDMI 2.1", price: 250, image: "https://via.placeholder.com/200" },
+              ],
+              "HDMI": [
+                  { id: 11, name: "HDMI 2.0", price: 200, image: "https://via.placeholder.com/200" },
+                  { id: 12, name: "HDMI 2.1", price: 250, image: "https://via.placeholder.com/200" },
                 
-            ]
-        };
+              ]
+          };
 
-        let cart = [];
-        function showCart() {
-            document.getElementById('cart-page').style.display = 'block';
-            document.getElementById('cart-items').innerHTML = cart.map(item => `<li>${item.name} - KES ${item.price}</li>`).join('');
-        }
-        function hideCart() {
-            document.getElementById('cart-page').style.display = 'none';
-        }
-        function sendOrder() {
-            let message = "Hey, i would like to order:%0A" + cart.map(item => `${item.name} - KES ${item.price}`).join('%0A');
-            window.open(`https://wa.me/254714456925?text=${message}`, '_blank');
-        }
 
-        function displayProducts() {
-            productsContainer.innerHTML = "";
-            for (const category in products) {
-                const categorySection = document.createElement("div");
-                categorySection.classList.add("category-section");
-                categorySection.innerHTML = `<h2>${category}</h2>`;
-                
-                const productList = document.createElement("div");
-                productList.classList.add("product-list");
-                
-                products[category].forEach(product => {
-                    const productCard = document.createElement("div");
-                    productCard.classList.add("product-card");
-                    productCard.innerHTML = `
-                        <img src="${product.image}" alt="${product.name}">
-                        <h3>${product.name}</h3>
-                        <p>Price: KES ${product.price}</p>
-                        <button onclick="addToCart(${product.id})">Add to Cart</button>
-                    `;
-                    productList.appendChild(productCard);
-                });
-                
-                categorySection.appendChild(productList);
-                productsContainer.appendChild(categorySection);
-            }
-        }
+          let cart = [];
+          function showCart() {
+              document.getElementById('cart-page').style.display = 'block';
+              document.getElementById('cart-items').innerHTML = cart.map(item => `<li>${item.name} - KES ${item.price}</li>`).join('');
+          }
+          function hideCart() {
+              document.getElementById('cart-page').style.display = 'none';
+          }
+          function sendOrder() {
+              let message = "Hey, i would like to order:%0A" + cart.map(item => `${item.name} - KES ${item.price}`).join('%0A');
+              window.open(`https://wa.me/254714456925?text=${message}`, '_blank');
+          }
+          function toggleCategory(category) {
+              const sections = document.querySelectorAll('.category-section');
+              sections.forEach(section => {
+                  if (section.querySelector('h2').textContent === category) {
+                      if (section.classList.contains('show')) {
+                          section.classList.remove('show'); // Hide the section
+                          setTimeout(() => {
+                              section.style.display = 'none'; // Set display to none after animation
+                          }, 500); // Match the duration of the transition
+                      } else {
+                          section.style.display = 'block'; // Show the section
+                          setTimeout(() => {
+                              section.classList.add('show'); // Add class to trigger animation
+                          }, 10); // Small timeout to allow display to take effect
+                      }
+                  } else {
+                      section.classList.remove('show'); // Hide other sections
+                      section.style.display = 'none'; // Set display to none immediately
+                  }
+              });
+          }
 
-        function addToCart(productId) {
-            for (const category in products) {
-                const product = products[category].find(p => p.id === productId);
-                if (product) {
-                    cart.push(product);
-                    cartCount.textContent = cart.length;
-                    alert(`${product.name} added to cart!`);
-                    break;
-                }
-            }
-        }
+          function displayProducts() {
+              productsContainer.innerHTML = "";
+              let firstCategory = null; // Variable to hold the first category name
+              for (const category in products) {
+                  if (!firstCategory) {
+                      firstCategory = category; // Set the first category
+                  }
+                  const categorySection = document.createElement("div");
+                  categorySection.classList.add("category-section");
+                  categorySection.innerHTML = `<h2>${category}</h2>`;
+                
+                  const productList = document.createElement("div");
+                  productList.classList.add("product-list");
+                
+                  products[category].forEach(product => {
+                      const productCard = document.createElement("div");
+                      productCard.classList.add("product-card");
+                      productCard.innerHTML = `
+                          <img src="${product.image}" alt="${product.name}">
+                          <h3>${product.name}</h3>
+                          <p>Price: KES ${product.price}</p>
+                          <button onclick="addToCart(${product.id})">Add to Cart</button>
+                      `;
+                      productList.appendChild(productCard);
+                  });
+                
+                  categorySection.appendChild(productList);
+                  productsContainer.appendChild(categorySection);
+              }
+            
+              // Show the first category by default
+              if (firstCategory) {
+                  toggleCategory(firstCategory);
+              }
+          }
+
+          function addToCart(productId) {
+              for (const category in products) {
+                  const product = products[category].find(p => p.id === productId);
+                  if (product) {
+                      cart.push(product);
+                      cartCount.textContent = cart.length;
+                      showToast(`${product.name} added to cart!`); // Show toast instead of alert
+                      break;
+                  }
+              }
+          }
+
+          function showToast(message) {
+              const toast = document.getElementById("toast");
+              toast.textContent = message; // Set the message
+              toast.classList.add("show"); // Add the show class
+
+              // Remove the toast after 3 seconds
+              setTimeout(() => {
+                  toast.classList.remove("show"); // Remove the show class
+              }, 3000); // Duration for the toast to be visible
+          }
         
-        displayProducts();
-    </script>
-</body>
-</html>
+          displayProducts();
+      </script>
+  </body>
