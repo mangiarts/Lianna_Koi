@@ -81,6 +81,9 @@
             justify-content: center;
         }
         .product-card {
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: space-between; /* Space items evenly */
             background: #e6b3e0; /* Soft lavender for product cards */
             padding: 15px;
             border-radius: 10px;
@@ -89,13 +92,16 @@
             color: #4a2c4a; /* Darker purple for text */
             min-width: 200px;
             max-width: 300px;
+            height: 350px; /* Set a fixed height for the card */
+            overflow: hidden; /* Prevent content overflow */
         }
         .product-card img {
             width: 100%;
-            height: 200px;
+            height: 200px; /* Ensure a fixed height */
             border-radius: 10px;
             margin-bottom: 10px;
-            object-fit: cover;
+            object-fit: cover; /* Maintain aspect ratio */
+            
         }
         .product-card button {
             background: rgb(136, 0, 106);
