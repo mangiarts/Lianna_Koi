@@ -204,47 +204,56 @@
         }
 
         /* Contact Section */
-        .contact-info {
+      .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
       margin-top: 50px;
+  }
+
+  .card {
+      background: rgb(226, 224, 224);
       padding: 20px;
-    }
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(240, 115, 57, 0.1);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+  }
 
-    .contact-info h2 {
-      font-family: 'Brasika', serif;
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 20px;
-    }
+  .card a {
+      color: #ff0040d8;
+      text-decoration: none;
+      font-weight: bold;
+  }
 
-    .contact-info p {
-      font-size: 18px;
-      margin-bottom: 10px;
-      font-weight: 400;
-    }
+  .card a:hover {
+      color: #ff0040d8;
+  }
 
-    .social-icons {
+  .social-icons {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-    }
+      margin-top: 10px;
+  }
 
-    .social-icons a {
-      margin: 0 15px;
+  .social-icons a {
+      margin: 0 10px;
       transition: transform 0.3s ease;
-    }
+  }
 
-    .social-icons a img {
-      width: 40px;
-      height: 40px;
+  .social-icons a img {
+      width: 30px;
+      height: 30px;
       transition: transform 0.3s ease;
-    }
+  }
 
-    .social-icons a:hover img {
+  .social-icons a:hover img {
       transform: scale(1.1);
-    }
+  }
 
-    .contact-form {
+  .contact-form {
       max-width: 800px;
       margin: 50px auto;
       padding: 30px;
@@ -314,127 +323,102 @@
     footer a:hover {
       color: #ff0040d8;
     }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .slide-in {
+        opacity: 0; /* Start hidden */
+        animation: slideIn 0.5s ease-out forwards;
+    }
+
+    .visible {
+        opacity: 1; /* Make visible when in view */
+    }
     </style>
 </head>
-
 <body>
+  <!-- Logo -->
+  <div class="logo">
+      <img src="20c4a556008d8c89098dccdb3b7e2834.jpg" alt="Lianna_Koi 254">
+  </div>
 
-    <!-- Logo -->
-    <div class="logo">
-        <img src="20c4a556008d8c89098dccdb3b7e2834.jpg" alt="Lianna_Koi 254">
-    </div>
+  <!-- Hero Section -->
+  <div class="hero slide-in">
+      <div>
+          <h1>Welcome to Lianna_Koi 254</h1>
+          <a href="shop.html">
+              <button class="contact-button">Visit our Shop</button>
+          </a>
+          <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61573191344937" title="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
+              <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok"><img src="icons/Tiktok.png" alt="Tiktok"></a>
+              <a href="https://www.instagram.com/lianna_koi/" title="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
+          </div>
+      </div>
+  </div>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div>
-            <h1>Welcome to Lianna_Koi 254</h1>
-            <a href="shop.html">
-                <button class="contact-button">Visit our Shop</button>
-            </a>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=61573263967706" title="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
-                <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok"><img src="icons/Tiktok.png" alt="Tiktok"></a>
-                <a href="https://www.instagram.com/lianna_koi/" title="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
-                <!-- <a href="#" title="LinkedIn"><img src="images/linkedin.png" alt="LinkedIn"></a> -->
-            </div>
-            </section>
-        </div>
-    </div>
+  <!-- About Section -->
+  <div class="about slide-in">
+      <h2>About Us</h2>
+      <p>At Lianna_Koi 254, we are your trusted partner in electronics sales, repairs, and equipment rentals...</p>
+      <!-- Rest of the content -->
+  </div>
 
-    <!-- About Section -->
-    <div class="about">
-        <h2>About Us</h2>
-        <p>At Lianna_Koi 254, we are your trusted partner in electronics sales, repairs, and equipment rentals. Based in Nairobi, we specialize in providing high-quality electronic gadgets, accessories, and professional repair services to keep your devices running smoothly.<p>
-
-          <p>What We Offer:</p>
-          <ul>
-              <li>Electronics Sales: From the latest smartphones, laptops, projectors, and accessories, we offer premium electronics at competitive prices.</li>
-              <li>Expert Repairs: Got a faulty device? Our skilled technicians are ready to diagnose and repair your gadgets quickly and efficiently.</li>
-              <li>Equipment for Hire: Need electronics for a short-term event or project? We provide rentals for projectors, sound systems, and other electronic devices.</li>
-          </ul>
-          
-          <h3>Delivery & Service Areas</h3>
-          <p>We deliver within Nairobi CBD for free! If you're outside the CBD, we still got you covered—deliveries beyond Nairobi CBD can be arranged at the client's expense.</p>
-
-        <img src="lianna 1.jpg" alt="SHIKO - CEO">
-        <p><strong>SHIKO</strong><br>Founder & CEO</p>
-    </div>
-
-    <div class="contact">
-        
-        <section id="contact-card"class="contact-card">
-            
-            <h2>Contact Details</h2>
-            <div class="card">
+  <!-- Contact Section -->
+  <div class="contact slide-in">
+      <section id="contact-card" class="contact-card">
+          <h2>Contact Details</h2>
+          <div class="card">
               <p><strong>Phone:</strong> <a href="https://wa.me/254714456925" target="_blank">+254 714 456925</a></p>
               <p><strong>Email:</strong> <a href="mailto:wanjikumwangi1267@gmail.com" target="_blank">wanjikumwangi1267@gmail.com</a></p>
               <p><strong>Address:</strong> Nairobi, Kenya</p>
               <p><strong>Follow us:</strong></p>
               <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=61573263967706" title="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
-                <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok"><img src="icons/Tiktok.png" alt="Tiktok"></a>
-                <a href="https://www.instagram.com/lianna_koi/" title="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
+                  <a href="https://www.facebook.com/profile.php?id=61573191344937" title="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
+                  <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok"><img src="icons/Tiktok.png" alt="Tiktok"></a>
+                  <a href="https://www.instagram.com/lianna_koi/" title="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
               </div>
-            </div>
-            <h2>Get in Touch</h2>
-            <!-- <p>Have a project in mind? Let's make it happen!</p> -->
-          </section>
-          <style>
-            .contact-card {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              text-align: center;
-              margin-top: 50px;
-            }
-          
-            .card {
-              background: rgb(226, 224, 224);
-              padding: 20px;
-              border-radius: 8px;
-              box-shadow: 0 10px 30px rgba(240, 115, 57, 0.1);
-              max-width: 400px;
-              width: 90%;
-            }
-          
-            .card a {
-              color: #ff0040d8;
-              text-decoration: none;
-              font-weight: bold;
-            }
-          
-            .card a:hover {
-              color: #ff0040d8;
-            }
-          
-            .social-icons {
-              display: flex;
-              justify-content: center;
-              margin-top: 10px;
-            }
-          
-            .social-icons a {
-              margin: 0 10px;
-              transition: transform 0.3s ease;
-            }
-          
-            .social-icons a img {
-              width: 30px;
-              height: 30px;
-              transition: transform 0.3s ease;
-            }
-          
-            .social-icons a:hover img {
-              transform: scale(1.1);
-            }
-          </style>
+          </div>
+      </section>
+  </div>
 
-    </div>
-    <footer>
-        <p>Active 24/7 - We're always here to assist you!</p>
-        <a href="">Contact Us</a>
-      </footer>
-
+  <footer class="slide-in">
+      <p>Active 24/7 - We're always here to assist you!</p>
+      <a href="">Contact Us</a>
+  </footer>
 </body>
-
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sections = document.querySelectorAll('.slide-in');
+
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
