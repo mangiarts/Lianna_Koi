@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
+    <!-- <style>
         body {
             font-family: 'Poppins', sans-serif;
             background: #f8d3e0; /* Light pink background */
@@ -38,9 +38,10 @@
         
         nav {
             display: flex;
-            justify-content: center;
-            margin-top: 10px;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
+
         #cart-button {
             position: fixed;
             bottom: 25px; /* Adjust as needed */
@@ -151,6 +152,18 @@
             header {
                 font-size: 20px;
             }
+            #category-nav {
+                padding: 5px; /* Adjust padding */
+            }
+            #category-nav ul {
+                flex-wrap: wrap; /* Allow items to wrap */
+                justify-content: flex-start; /* Align items to the start */
+            }
+            #category-nav li {
+                flex: 1 1 auto; /* Allow items to grow and shrink */
+                min-width: 100px; /* Set a minimum width */
+                margin: 5px; /* Adjust margin */
+            }
         }
         .toast {
             visibility: hidden; /* Hidden by default */
@@ -226,6 +239,17 @@
             white-space: nowrap;
             padding: 10px 0;
         }
+        .category-container ul {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-x: auto;
+        }
+        .category-container ul li {
+            white-space: nowrap;
+            padding: 5px;
+        }
+
+
 
         #category-nav ul {
             display: flex;
@@ -250,7 +274,7 @@
             background: #ff80ab;
         }
 
-    </style>
+    </style> -->
 </head>
 <body>
     <header>
@@ -262,6 +286,7 @@
             <ul>
                 <li onclick="toggleCategory('Projectors')">Projectors</li>
                 <li onclick="toggleCategory('projector screens')">projector screens</li>
+                <li onclick="toggleCategory('phone covers')">phone covers</li>
                 <li onclick="toggleCategory('Laptops')">Laptops</li>
                 <!-- <li onclick="toggleCategory('Speakers')">Speakers</li>
                 <li onclick="toggleCategory('Smartphones')">Smartphones</li>
@@ -327,11 +352,13 @@
               { id: 9, name: "LW MPS 180M MANUAL PROJECTOR SCREEN 180cm x 180cm", price: 10500, image: "posts/projector screens/TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm.jpeg" }
 
               ],
-            //   "mi-fi-routers": [
-            //       { id: 1, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
-            //       { id: 2, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" },
-            //       { id: 3, name: "TP-Link Deco M5", price: 200, image: "https://via.placeholder.com/200" }
-            //   ],
+              "phone covers": [
+                  { id: 1, name: "high-quality", price: 300, image: "posts/phone covers/high-quality.JPG" },
+                  { id: 2, name: "high-quality", price: 300, image: "posts/phone covers/high quality.JPG" },
+                  { id: 3, name: "Tom and Jerry", price: 300, image: "posts/phone covers/Tom and Jerry.JPG" },
+                  { id: 4, name: "3D", price: 200, image: "posts/phone covers/3D.JPG" }
+                  
+              ],
               "Laptops": [
                   { id: 1, name: "HP EliteBook", price: 29999, image: "posts/laptops/HP EliteBook 840 G6 8th Gen Intel Core i5-8365U 24GB RAM 256GB SSD 14″ Ultra Slim Laptop @ 29,999 only.jpg" },
                   { id: 2, name: "Hp 840 G6 Intel Corei5 8th generation 8gbRAM  256 SSD , Backlit Keyboard, Fingerprint ", price: 29999, image: "posts/laptops/Hp 840 G6 Intel Corei5 8th generation.jpeg" },
