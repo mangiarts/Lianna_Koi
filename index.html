@@ -1,462 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lianna_Koi 254 - Electronics Shop</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f8d3e0; /* Light pink background */
-            color: #4a2c4a; /* Darker purple for text */
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            position: relative;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        header img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .header-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lianna — Electronics Shop</title>
+  <meta name="description" content="Lianna - Quality electronics, great prices, trusted by thousands. Visit our shop for the latest gadgets." />
+  <meta name="keywords" content="Lianna, electronics, gadgets, kenya, Nairobi, shop" />
 
-        .social-icons a {
-            margin: 0 15px;
-            transition: transform 0.3s ease;
-        }
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        .social-icons a img {
-            width: 40px;
-            height: 40px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icons a:hover img {
-            transform: scale(1.1);
-        }
-
-        button {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #ff0040d8;
-            color: #fff;
-            padding: 10px 20px;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #fff;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: #ff0040d8;
-            z-index: 1;
-        }
-
-        @keyframes rotateBackground {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hero div {
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero button {
-            font-size: 1.2rem;
-        }
-
-        /* Logo Styles */
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 3;
-        }
-
-        .logo img {
-            max-width: 100px;
-        }
-
-        /* About Section */
-        .about {
-            padding: 50px;
-            background-color: #F5F5F5;
-            text-align: center;
-        }
-
-        .about p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-        }
-
-        .about img {
-            margin-top: 20px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ff0040d8;
-        }
-
-        /* Featured Services */
-        .services {
-            padding: 50px;
-            background-color: #F5F5F5;
-            text-align: center;
-        }
-
-        .services {
-            display: flex;
-            justify-content: space-around;
-            background: #000;
-            padding: 50px 20px;
-            color: #fff;
-        }
-
-        .service {
-            text-align: center;
-            width: 30%;
-            transition: transform 0.3s ease;
-        }
-
-        .service:hover {
-            transform: scale(1.1);
-        }
-
-        .service h3 {
-            margin-bottom: 15px;
-        }
-
-         /* Gallery Section */
-         .gallery {
-            padding: 20px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .gallery-grid img {
-            width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Contact Section */
-      .contact-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-top: 50px;
-  }
-
-  .card {
-      background: rgb(226, 224, 224);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(240, 115, 57, 0.1);
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-  }
-
-  .card a {
-      color: #ff0040d8;
-      text-decoration: none;
-      font-weight: bold;
-  }
-
-  .card a:hover {
-      color: #ff0040d8;
-  }
-
-  .social-icons {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-  }
-
-  .social-icons a {
-      margin: 0 10px;
-      transition: transform 0.3s ease;
-  }
-
-  .social-icons a img {
-      width: 30px;
-      height: 30px;
-      transition: transform 0.3s ease;
-  }
-
-  .social-icons a:hover img {
-      transform: scale(1.1);
-  }
-
-  .contact-form {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.589);
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  <style>
+    /* ========== Variables ========== */
+    :root{
+      --brand-red: #d80b2f;   /* main bright red */
+      --brand-deep: #8b0a1f;  /* deeper red for accents */
+      --muted: #f4f4f6;
+      --card-bg: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.06);
+      --text-dark: #111;
+      --max-width: 1100px;
     }
 
-    .contact-form h2 {
-      font-family: 'Brasika', serif;
-      font-size: 32px;
-      color: #333;
-      margin-bottom: 20px;
+    /* ========== Base ========== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #fff 0%, #fff 40%, var(--muted) 40.1%); /* subtle page bg below hero */
+      color: #111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      font-size: 16px;
+    a { color: inherit; text-decoration: none; }
+
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 20px;
     }
 
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: #ff0040d8;
+    /* ========== Header / Logo ========== */
+    .logo {
+      position: absolute;
+      top:20px;
+      left:20px;
+      z-index:50;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo img { width:60px; height:auto; display:block; }
+    .logo .brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight:700;
+      color: rgba(255,255,255,0.95);
+      letter-spacing:0.4px;
+      font-size:20px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
 
-    .contact-form button {
-      width: 100%;
-      padding: 14px;
-      background-color: #ff0040d8;
-      color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    /* ========== HERO ========== */
+    .hero {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      background: var(--brand-red);
+      color: #fff;
     }
 
-    .contact-form button:hover {
-      background-color: #ff0040d8;
-      /* Darker amber */
-    }
-    footer {
-      text-align: center;
-      background-color: black;
-      color: white;
-      padding: 20px;
-      margin-top: 50px;
-    }
-
-    footer p {
-      font-size: 16px;
+    /* decorative diagonal shape */
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.06) 100%),
+        radial-gradient(600px 400px at 10% 10%, rgba(255,255,255,0.03), transparent 20%),
+        transparent;
+      z-index:1;
+      pointer-events:none;
     }
 
-    footer a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
+    .hero-inner{
+      z-index:2;
+      text-align:center;
+      width:100%;
+      padding:80px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:22px;
     }
 
-    footer a:hover {
-      color: #ff0040d8;
-    }
-    .social-icons {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        margin-top: 10px;
-    }
-    .social-icons a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: #444;
-        border-radius: 50%;
-        transition: background 0.3s ease;
-    }
-    .social-icons a:hover {
-        background: #ff80ab;
-    }
-    .social-icons i {
-        font-size: 20px;
-        color: white;
-    }
-    @keyframes slideIn {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    h1{
+      margin:0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight:700;
+      font-size: clamp(2.2rem, 6vw, 4.6rem); /* responsive */
+      letter-spacing: -0.02em;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
 
-    .slide-in {
-        opacity: 0; /* Start hidden */
-        animation: slideIn 0.5s ease-out forwards;
+    /* Tagline (value prop) */
+    .tagline{
+      font-size: clamp(1rem, 2.0vw, 1.25rem);
+      max-width:720px;
+      margin:0 auto;
+      opacity:0.95;
+      font-weight:500;
     }
 
-    .visible {
-        opacity: 1; /* Make visible when in view */
+    /* Benefit chips */
+    .benefits{
+      display:flex;
+      gap:14px;
+      margin-top:6px;
+      flex-wrap:wrap;
+      justify-content:center;
     }
-    </style>
+    .benefit{
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:0.95rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* CTA */
+    .cta {
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .btn-primary{
+      background: #fff;
+      color: var(--brand-red);
+      border: 2px solid rgba(255,255,255,0.18);
+      padding:14px 26px;
+      border-radius:10px;
+      font-weight:700;
+      font-family: 'Montserrat', sans-serif;
+      font-size:1.05rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-primary:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
+
+    .btn-ghost{
+      background: transparent;
+      color: rgba(255,255,255,0.95);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:600;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .btn-ghost:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.04); }
+
+    /* Social icons under CTA */
+    .hero .social{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+      justify-content:center;
+    }
+    .social a{
+      width:46px;
+      height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background: rgba(0,0,0,0.18);
+      transition: transform .18s ease, background .18s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+    .social a i{ color: #fff; font-size:18px; }
+    .social a:hover{ transform: translateY(-6px) scale(1.06); background: rgba(255,255,255,0.12); }
+
+    /* trust bar under hero (quick social proof numbers) */
+    .trust-bar{
+      margin-top:18px;
+      display:flex;
+      gap:22px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .trust-item{ font-weight:700; color: rgba(255,255,255,0.95); font-size:0.95rem; opacity:0.98; }
+
+    /* ========== Main content (below hero) ========== */
+    main{ padding:60px 0 120px; }
+
+    /* social proof / testimonials area */
+    .social-proof{
+      background: #fff;
+      border-radius:14px;
+      padding:30px;
+      margin: 0 20px;
+      box-shadow: 0 10px 30px rgba(20,20,20,0.06);
+      max-width: var(--max-width);
+      margin-left:auto;
+      margin-right:auto;
+      display:grid;
+      gap:18px;
+    }
+
+    .proof-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .proof-left h3{ margin:0; font-size:1.25rem; font-weight:700; }
+    .proof-left p{ margin:0; color: #555; }
+
+    /* testimonial cards */
+    .testimonials{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:14px;
+      margin-top:8px;
+    }
+    .testimonial{
+      padding:16px;
+      border-radius:12px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      border: 1px solid #eee;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+      min-height:120px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .testimonial .avatar{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#f0f0f0,#ddd);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#555;
+      flex:0 0 56px;
+      font-size:14px;
+    }
+    .testimonial p{ margin:0; color:#444; font-size:0.95rem; }
+    .testimonial .meta{ margin-top:8px; color:#777; font-size:0.85rem; }
+
+    /* benefits / features row */
+    .features{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+      margin-top:26px;
+    }
+    .feature-card{
+      background: linear-gradient(180deg,#fff,#fbfbfb);
+      padding:18px;
+      border-radius:12px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      text-align:left;
+    }
+    .feature-card h4{ margin:0 0 8px 0; font-size:1.05rem; }
+    .feature-card p{ margin:0; color:#555; font-size:0.95rem; }
+
+    /* Footer */
+    footer{
+      margin-top:46px;
+      padding:26px 20px;
+      text-align:center;
+      color:#d80b2f;
+      font-size:0.95rem;
+    }
+
+    /* small screens */
+    @media (max-width:720px){
+      .logo{ left:14px; top:14px; }
+      .hero-inner{ padding:60px 18px; }
+      .trust-item{ font-size:0.9rem; }
+    }
+
+    /* subtle entrance animations */
+    .fade-up{
+      opacity:0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible{
+      opacity:1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
-<meta name="description" content="Lianna Koi 254 - Your trusted electronics shop. Get the latest gadgets at unbeatable prices.">
-<meta name="keywords" content="electronics, gadgets, Lianna Koi, best electronics store">
-<meta name="robots" content="index, follow">
-
 <body>
-  <!-- Logo -->
-  <div class="logo">
-      <img src="20c4a556008d8c89098dccdb3b7e2834.jpg" alt="Lianna_Koi 254">
+
+  <!-- Logo (simple text + optional image) -->
+  <div class="logo" aria-hidden="false">
+    <!-- Replace the src with your transparent icon file if you have one -->
+    <img src="lianna-icon-&-name.png" alt="Lianna logo (icon)" onerror="this.style.display='none'">
+    <!-- <div class="brand">Lianna</div> -->
   </div>
 
-  <!-- Hero Section -->
-  <div class="hero slide-in">
-      <div>
-          <h1>Welcome to Lianna_Koi 254</h1>
-          <a href="shop.html">
-              <button class="contact-button">Visit our Shop</button>
-          </a>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=61573191344937" title="Facebook">
-                <i class="fab fa-facebook-f" style="font-size: 24px; color: white;"></i>
-            </a>
-            <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok">
-                <i class="fab fa-tiktok" style="font-size: 24px; color: white;"></i>
-            </a>
-            <a href="https://www.instagram.com/lianna_koi/" title="Instagram">
-                <i class="fab fa-instagram" style="font-size: 24px; color: white;"></i>
-            </a>
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="hero-inner container">
+      <h1>Welcome to Lianna</h1>
+
+      <!-- Clear value proposition / tagline -->
+      <p class="tagline">Quality electronics, reliable repairs and fast delivery — trusted by thousands across Nairobi and Kenya.</p>
+
+      <!-- Benefits as short chips — quick scannable reasons to stay -->
+      <div class="benefits" aria-hidden="true">
+        <div class="benefit">🔧 Repairs & warranty</div>
+        <div class="benefit">⚡ Fast same-day delivery</div>
+        <div class="benefit">💸 Competitive prices</div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="cta" role="navigation" aria-label="primary actions">
+        <a class="btn-primary" href="shop.html" title="Visit our shop">Visit our Shop</a>
+        <a class="btn-ghost" href="#contact" title="Contact us">Contact / Ask a question</a>
+      </div>
+
+      <!-- small trust numbers (quick social proof) -->
+      <div class="trust-bar" role="status" aria-live="polite">
+        <div class="trust-item">🌟 4.8/5 rated</div>
+        <div class="trust-item">👥 5,000+ happy customers</div>
+        <div class="trust-item">✅ Secure payments</div>
+      </div>
+
+      <!-- social icons -->
+      <div class="social" aria-label="Social links">
+        <a href="https://www.facebook.com/profile.php?id=61579199435696" title="Facebook" target="_blank" rel="noopener">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.tiktok.com/@liannawangui" title="TikTok" target="_blank" rel="noopener">
+          <i class="fab fa-tiktok" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/liannawangui/" title="Instagram" target="_blank" rel="noopener">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT: Social proof, features -->
+  <main class="container">
+    <section class="social-proof fade-up" id="social-proof">
+      <div class="proof-top">
+        <div class="proof-left">
+          <h3>Why customers love Lianna</h3>
+          <p>Honest pricing, transparent repairs, and quick delivery — check a few recent customer comments below.</p>
+        </div>
+        <div class="proof-right" style="color:#666; font-weight:600;">Rated 4.8/5 on local reviews</div>
+      </div>
+
+      <!-- testimonial cards -->
+      <div class="testimonials" aria-live="polite">
+        <article class="testimonial" role="article">
+          <div class="avatar">AM</div>
+          <div>
+            <p>"Bought a refurbished phone here — like new, and they fixed a small issue next day without charge. Highly recommend!"</p>
+            <div class="meta">— Alice M., Nairobi</div>
+          </div>
+        </article>
+
+        <article class="testimonial" role="article">
+          <div class="avatar">JB</div>
+          <div>
+            <p>"Great prices and same-day delivery. The team even helped setup my device over WhatsApp." </p>
+            <div class="meta">— John B., Mombasa</div>
+          </div>
+        </article>
+
+        <article class="testimonial" role="article">
+          <div class="avatar">SK</div>
+          <div>
+            <p>"Excellent repair service — transparent diagnosis and a fair warranty. Will return for accessories."</p>
+            <div class="meta">— Sarah K., Nakuru</div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Features section: short benefit explanations -->
+      <div class="features" style="margin-top:18px;">
+        <div class="feature-card">
+          <h4>Trusted Repairs</h4>
+          <p>Certified technicians, spare parts warranty, and clear estimates before work begins.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Wide Selection</h4>
+          <p>New & refurbished phones, accessories, and small electronics — curated for value.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Easy Returns & Support</h4>
+          <p>30-day returns policy and responsive after-sales support via phone or WhatsApp.</p>
         </div>
       </div>
-  </div>
+    </section>
 
-  <!-- About Section -->
-  <div class="about slide-in">
-      <h2>About Us</h2>
-      <p>At Lianna_Koi 254, we are your trusted partner in electronics sales, repairs, and equipment rentals...</p>
-      <!-- Rest of the content -->
-  </div>
+    <!-- Contact card -->
+    <section id="contact" class="fade-up" style="margin-top:28px;">
+      <div class="contact-card" style="max-width:720px; margin-left:auto; margin-right:auto;">
+        <div class="card" style="background:#fff; border-radius:12px; padding:18px; text-align:left;">
+          <h3 style="margin-top:0;">Contact & Store</h3>
+          <p><strong>Phone:</strong> <a href="https://wa.me/254714456925" target="_blank" rel="noopener">+254 714 456 925</a></p>
+          <p><strong>Email:</strong> <a href="mailto:wanjikumwangi1267@gmail.com">wanjikumwangi1267@gmail.com</a></p>
+          <p><strong>Location:</strong> Nairobi, Kenya</p>
 
-  <!-- Contact Section -->
-  <div class="contact slide-in">
-      <section id="contact-card" class="contact-card">
-          <h2>Contact Details</h2>
-          <div class="card">
-              <p><strong>Phone:</strong> <a href="https://wa.me/254714456925" target="_blank">+254 714 456925</a></p>
-              <p><strong>Email:</strong> <a href="mailto:wanjikumwangi1267@gmail.com" target="_blank">wanjikumwangi1267@gmail.com</a></p>
-              <p><strong>Address:</strong> Nairobi, Kenya</p>
-              <p><strong>Follow us:</strong></p>
-              <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=61573191344937" title="Facebook">
-                    <i class="fab fa-facebook-f" style="font-size: 24px; color: white;"></i>
+          <div style="margin-top:12px;">
+            <strong>Follow us</strong>
+            <div class="social" aria-label="Social links">
+                <a href="https://www.facebook.com/profile.php?id=61579199435696" title="Facebook" target="_blank" rel="noopener">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
                 </a>
-                <a href="https://www.tiktok.com/@lianna_koi" title="Tiktok">
-                    <i class="fab fa-tiktok" style="font-size: 24px; color: white;"></i>
+                <a href="https://www.tiktok.com/@liannawangui" title="TikTok" target="_blank" rel="noopener">
+                <i class="fab fa-tiktok" aria-hidden="true"></i>
                 </a>
-                <a href="https://www.instagram.com/lianna_koi/" title="Instagram">
-                    <i class="fab fa-instagram" style="font-size: 24px; color: white;"></i>
+                <a href="https://www.instagram.com/liannawangui/" title="Instagram" target="_blank" rel="noopener">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
                 </a>
             </div>
           </div>
-      </section>
-  </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- WhatsApp Floating Chat Button -->
+    <a href="https://wa.me/254714456925?text=Hi%20Lianna%2C%20I%27m%20interested%20in%20your%20products" 
+    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    </a>
 
-  <footer class="slide-in">
-      <p>Active 24/7 - We're always here to assist you!</p>
-      <a href="">Contact Us</a>
+    <style>
+    .whatsapp-float {
+        position: fixed;
+        width: 58px;
+        height: 58px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 28px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .whatsapp-float:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+    .whatsapp-float i {
+        margin: 0;
+    }
+
+    /* Small bounce animation */
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    .whatsapp-float {
+        animation: bounce 3s infinite;
+    }
+    </style>
+
+
+  <footer>
+    <div style="max-width:var(--max-width); margin:0 auto; padding:6px 20px;">
+      <small>© <strong>Lianna</strong> — Trusted electronics & repairs • Open: Mon–Sat • Secure payments</small>
+    </div>
   </footer>
+
+  <script>
+    // Simple Intersection Observer to animate fade-up elements into view
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    });
+  </script>
 </body>
 </html>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const sections = document.querySelectorAll('.slide-in');
-
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    });
-</script>

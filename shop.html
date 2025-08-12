@@ -1,494 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lianna_Koi 254 - Electronics Shop</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f8d3e0; /* Light pink background */
-            color: rgb(168, 168, 168);
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            position: relative;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        header img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .header-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lianna - Electronics Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
-        #cart-button {
-            position: fixed;
-            bottom: 25px; /* Adjust as needed */
-            right: 25px; /* Adjust as needed */
-            background: #f5077e; /* Pastel pink for buttons */
-            color: white;
-            border: none;
-            padding: 15px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1000; /* Ensure it is above other content */
-        }
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    /* Hero */
+    .hero {
+      background: #d80b2f;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .hero h1 { margin: 0; font-size: 2.5rem; font-weight: 700; }
+    .hero p { font-size: 1.1rem; margin-top: 10px; opacity: 0.9; }
+    .hero button {
+      margin-top: 20px;
+      background: white;
+      color: #d80b2f;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .hero button:hover { transform: scale(1.05); }
 
-        .category-section {
-            display: none; /* Hide all sections initially */
-            margin: 20px;
-            padding: 15px;
-            background: #2a2a2a;
-            border-radius: 10px;
-            text-align: center;
-            opacity: 0; /* Start hidden */
-            transform: translateY(-20px); /* Start slightly above */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for opacity and position */
-        }
-        .category-section h2 {
-            margin-bottom: 15px;
-        }
-        .category-section.show {
-            display: block; /* Show the section */
-            opacity: 1; /* Fade in */
-            transform: translateY(0); /* Move to original position */
-        }
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding-bottom: 10px;
-            justify-content: center;
-        }
-        .product-card {
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Stack items vertically */
-            justify-content: space-between; /* Space items evenly */
-            background: #e6b3e0; /* Soft lavender for product cards */
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(255, 20, 147, 0.5);
-            text-align: center;
-            color: #4a2c4a; /* Darker purple for text */
-            min-width: 200px;
-            max-width: 300px;
-            height: 350px; /* Set a fixed height for the card */
-            overflow: hidden; /* Prevent content overflow */
-        }
-        .product-card img {
-            width: 100%;
-            height: 200px; /* Ensure a fixed height */
-            border-radius: 10px;
-            margin-bottom: 10px;
-            object-fit: cover; /* Maintain aspect ratio */
-            
-        }
-        .product-card button {
-            background: rgb(136, 0, 106);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-        .product-card button:hover {
-            background: #ff80ab; /* Lighter pink for button hover */
-        }
-        #cart-page {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #000000;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.596);
-            backdrop-filter: blur(10px);
-            width: 300px;
-            text-align: center;
-        }
-        #cart-page button {
-            display: block;
-            margin: 10px auto;
-        }
-        @media (max-width: 600px) {
-            .product-list {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            .product-card {
-                width: auto;
-                min-width: 200px;
-                max-width: 90%;
-            }
-            .category-section {
-                margin: 10px;
-                padding: 10px;
-            }
-            header {
-                font-size: 20px;
-            }
-            #category-nav {
-                padding: 5px; /* Adjust padding */
-            }
-            #category-nav ul {
-                flex-wrap: wrap; /* Allow items to wrap */
-                justify-content: flex-start; /* Align items to the start */
-            }
-            #category-nav li {
-                flex: 1 1 auto; /* Allow items to grow and shrink */
-                min-width: 100px; /* Set a minimum width */
-                margin: 5px; /* Adjust margin */
-            }
-        }
-        .toast {
-            visibility: hidden; /* Hidden by default */
-            min-width: 250px; /* Minimum width */
-            margin-left: -125px; /* Center the toast */
-            background-color: #ff80ab; /* Black background */
-            color: #fff; /* White text */
-            text-align: center; /* Centered text */
-            border-radius: 2px; /* Rounded corners */
-            padding: 16px; /* Padding */
-            position: fixed; /* Fixed position */
-            z-index: 1000; /* Sit on top */
-            left: 50%; /* Center horizontally */
-            bottom: 30px; /* 30px from the bottom */
-            font-size: 17px; /* Font size */
-            transition: visibility 0s, opacity 0.5s linear; /* Transition for visibility and opacity */
-            opacity: 0; /* Hidden by default */
-        }
+    /* Trust badges */
+    .trust-bar {
+      display: flex; justify-content: center; gap: 20px;
+      background: white; padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
+    .trust-item { font-size: 0.95rem; color: #444; display: flex; align-items: center; gap: 8px; }
+    .trust-item i { color: #d80b2f; }
 
-        .toast.show {
-            visibility: visible; /* Show the toast */
-            opacity: 1; /* Fade in */
-        }
-        #cart-page button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 80%;
-        }
-        #cart-page button:first-of-type {
-            background: #25D366;
-            color: white;
-        }
-        #cart-page button:first-of-type:hover {
-            background: #1da851;
-        }
-        #cart-page button:last-of-type {
-            background: #ff0202;
-            color: white;
-        }
-        #cart-page button:last-of-type:hover {
-            background: #cc0000;
-        }
-        #category-nav {
-            background: #2a2a2a; /* Dark background for the nav */
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            transition: background 0.3s ease; /* Transition for background color */
-        }
-        #category-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        #category-nav li {
-            margin: 0 15px;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s; /* Transition for color and scale */
-        }
-        #category-nav li:hover {
-            color: #ff80ab; /* Change color on hover */
-            transform: scale(1.1); /* Slightly enlarge on hover */
-        }
-        .category-container {
-            width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 10px 0;
-        }
-        .category-container ul {
-            display: flex;
-            flex-wrap: wrap;
-            overflow-x: auto;
-        }
-        .category-container ul li {
-            white-space: nowrap;
-            padding: 5px;
-        }
+    /* Category Nav */
+    #category-nav { background: #2a2a2a; padding: 10px 0; overflow-x: auto; }
+    #category-nav ul {
+      display: flex; list-style: none; padding: 0; margin: 0; gap: 10px; justify-content: center;
+    }
+    #category-nav li {
+      background: #444; padding: 8px 14px; border-radius: 5px; color: white;
+      cursor: pointer; white-space: nowrap; transition: background 0.3s;
+    }
+    #category-nav li:hover, #category-nav li.active { background: #d80b2f; }
 
+    /* Product grid */
+    .category-section { padding: 30px 20px; max-width: 1200px; margin: auto; }
+    .category-section h2 { margin-bottom: 20px; font-size: 1.6rem; color: #d80b2f; }
+    .product-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+    }
+    .product-card {
+      background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; }
+    .product-card h3 { font-size: 1rem; padding: 10px; flex: 1; }
+    .product-card p { font-weight: bold; padding: 0 10px; margin: 0 0 10px; color: #d80b2f; }
+    .product-card button {
+      background: #d80b2f; color: white; border: none; padding: 10px; cursor: pointer;
+      border-radius: 0 0 10px 10px; font-weight: 600;
+    }
+    .product-card button:hover { background: #b00925; }
 
+    /* Cart Drawer */
+    #cart-page {
+      position: fixed; top: 0; right: -350px; width: 300px; height: 100%;
+      background: white; box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      transition: right 0.3s ease; padding: 20px; overflow-y: auto; z-index: 1000;
+    }
+    #cart-page.open { right: 0; }
+    #cart-page h2 { margin-top: 0; font-size: 1.4rem; color: #d80b2f; }
+    #cart-items { list-style: none; padding: 0; margin: 10px 0; }
+    #cart-items li { margin-bottom: 8px; font-size: 0.9rem; }
+    #cart-page button {
+      width: 100%; padding: 10px; border: none; border-radius: 5px; margin-top: 10px; cursor: pointer;
+    }
+    #cart-page button:first-of-type { background: #25D366; color: white; }
+    #cart-page button:last-of-type { background: #ff0202; color: white; }
 
-        #category-nav ul {
-            display: flex;
-            flex-wrap: nowrap;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            gap: 15px;
-        }
+    /* Cart Button */
+    #cart-button {
+      position: fixed; bottom: 20px; right: 20px; background: #d80b2f; color: white;
+      border: none; padding: 15px; border-radius: 50%; font-size: 18px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; z-index: 1001;
+    }
 
-        #category-nav li {
-            flex: 0 0 auto;
-            padding: 10px 15px;
-            background: #444;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background: #d80b2f; color: white;
+      text-align: center; border-radius: 4px; padding: 12px;
+      position: fixed; z-index: 1002; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.95rem; opacity: 0; transition: opacity 0.4s;
+    }
+    .toast.show { visibility: visible; opacity: 1; }
 
-        #category-nav li:hover {
-            background: #ff80ab;
-        }
-
-    </style> -->
+    /* WhatsApp Bubble */
+    .whatsapp-float {
+      position: fixed; width: 55px; height: 55px; bottom: 90px; right: 20px;
+      background-color: #25D366; color: white; border-radius: 50%; text-align: center;
+      font-size: 28px; z-index: 1001; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .whatsapp-float:hover { transform: scale(1.08); }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="lianna.jpg" alt="Header Image">
-    </header>
-    
-    <nav id="category-nav">
-        <div class="category-container">
-            <ul>
-                <li onclick="toggleCategory('Projectors')">Projectors</li>
-                <li onclick="toggleCategory('projector screens')">projector screens</li>
-                <li onclick="toggleCategory('phone covers')">phone covers</li>
-                <li onclick="toggleCategory('Laptops')">Laptops</li>
-                <!-- <li onclick="toggleCategory('Speakers')">Speakers</li>
-                <li onclick="toggleCategory('Smartphones')">Smartphones</li>
-                <li onclick="toggleCategory('Headphones')">Headphones</li>
-                <li onclick="toggleCategory('HDMI')">HDMI</li> -->
-            </ul>
-        </div>
-    </nav>
-    
-    
-    <nav>
-        <button id="cart-button" onclick="showCart()">
-            <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
-        </button>
-    </nav>
-    
-    <main>
-        <section id="products">
-            <!-- Products will be dynamically inserted here -->
-        </section>
-    </main>
-    <div id="toast" class="toast">Item added to cart!</div>
 
-    
-    <div id="cart-page">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <button onclick="sendOrder()">Order via WhatsApp</button>
-        <button onclick="hideCart()">Close</button>
-    </div>
-      <script>
-          const productsContainer = document.getElementById("products");
-          const cartCount = document.getElementById("cart-count");
-        
-          const products = {
-              "Projectors": [
-                  { id: 1, name: "Hitachi CP-X995W Projector XGA 4500lumens", price: 30999, image: "posts/projectors/Hitachi CP-X995W Projector XGA Large Venue Projector 4500lumens.jpg" },
-                  { id: 2, name: "Epson EB-S31 Multi-Media Projector 3200 Lumens", price: 39500, image: "posts/projectors/Epson EB-S31 Multi-Media Projector 3200 Lumens.png" },
-                  { id: 2, name: "Epson Projector EB-S41 3300Lumens", price: 39500, image: "posts/projectors/Epson Projector EB-S41 Mobile Multimedia Projector-3300Lumens-3LCD-White.JPEG" },
-                  { id: 3, name: "Epson EB-S05 SVGA 3LCD 3200 Lumens", price: 39000, image: "posts/projectors/Epson EB-S05 SVGA 3LCD 3200 Lumens Projector 3200 lumens.png" },
-                  { id: 4, name: "Hitachi CP-DW10N Projector WXGA 2000 lumens ", price: 20999, image: "posts/projectors/Hitachi CP-DW10N Projector WXGA Conference Room Projector 2000 lumens.jpg" },
-                  { id: 5, name: "Sony VPL ES5 Conference room projector 2000 lumens", price: 20999, image: "posts/projectors/Sony VPL ES5 Conference room projector 2000 lumens.png" },
-                  { id: 6, name: "Dell 3200MP Projector XGA 1,300 ANSI Lumens", price: 15999, image: "posts/projectors/Dell 3200MP Projector XGA Home Theater Projector 1,300 ANSI Lumens.png" },
-                  { id: 7, name: "TOSHIBA TDP-S9  Projector DLP SVGA 1500 LUMENS", price: 15999, image: "posts/projectors/TOSHIBA TDP-S9  Projector DLP SVGA 1500 LUMENS.JPEG" },
-                  { id: 8, name: "Hitachi CP-X308 Projector XGA 2600 lumens", price: 15999, image: "posts/projectors/Hitachi CP-X308 Projector XGA Conference Room Projector2600lumens.JPEG" },
-                  { id: 9, name: "Christie Captiva DHD400S Projector 1080P (UST) Laser Projector", price: 45000, image: "posts/projectors/Christie_DHD400S_1080P_UST.png" },
-                  { id: 10, name: "Optoma EP772 Projector XGA DLP 3100 Lumens", price: 31500, image: "posts/projectors/Optoma_EP772.JPEG" },
-                  { id: 11, name: "Panasonic PT-LB51U Projector XGA 2000 Lumens", price: 15999, image: "posts/projectors/Dell 4320 Projector.JPEG" },
-                //   { id: 12, name: "Dell 4320 Projector WXGA Conference Room Projector 4300 lumens", price: 30999, image: "posts/projectors/Epson EB-X41 XGA 3LCD Projector 3600 Lumens.png" },
-                //   { id: 13, name: "CTX PS5120 Boardroom 2000", price: 15000, image: "posts/projectors/Epson EB-X05 XGA 3LCD Projector 3300 Lumens.png" },
-                //   { id: 14, name: "Epson EB-X41 XGA 3LCD Projector 3600 Lumens", price: 42000, image: "posts/projectors/Epson EB-X41 XGA 3LCD Projector 3600 Lumens.png" },
-                //   { id: 15, name: "Epson EB-X05 XGA 3LCD Projector 3300 Lumens", price: 39000, image: "posts/projectors/Epson EB-X05 XGA 3LCD Projector 3300 Lumens.png" }
-              ],
-              "projector screens": [
-              { id: 1, name: "Trypod projector screensLW TPS 180T TRIPOD PROJECTOR SCREEN 180cm x 180cm", price: 10700, image: "posts/projector screens/Trypod projector screen.JPEG" },
-              { id: 2, name: "Trypod projector screensLW TPS 200T TRIPOD PROJECTOR SCREEN 200cm x 200cm", price: 13500, image: "posts/projector screens/Trypod projector screensLW TPS 200T.jpeg" },
-              { id: 3, name: "Trypod projector screensLW TPS 240T TRIPOD PROJECTOR SCREEN 240cm x 240cm", price: 16500, image: "posts/projector screens/Trypod projector screen.jpeg" },
-              { id: 4, name: "Motorized Projector Screen LW EPS 180E ELECTRIC PROJECTOR SCREEN 180cm x 180cm", price: 19000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
-              { id: 5, name: "Motorized Projector Screen LW EPS 200E ELECTRIC PROJECTOR SCREEN 200cm x 200cm", price: 20000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
-              { id: 6, name: "Motorized Projector Screen EPS 240E ELECTRIC PROJECTOR SCREEN 240cm x 240cm", price: 24000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
-              { id: 7, name: "Motorized Projector Screen TECHCOM ELECTRIC PROJECTOR SCREEN 300cm x 300cm", price: 31000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
-              { id: 8, name: "TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm", price: 9500, image: "posts/projector screens/TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm.jpeg" },
-              { id: 9, name: "LW MPS 180M MANUAL PROJECTOR SCREEN 180cm x 180cm", price: 10500, image: "posts/projector screens/TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm.jpeg" }
+  <section class="hero">
+    <h1>Welcome to Lianna</h1>
+    <p>Your trusted source for electronics, repairs & fast delivery in Kenya</p>
+    <button onclick="document.getElementById('category-nav').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+  </section>
 
-              ],
-              "phone covers": [
-                  { id: 1, name: "high-quality", price: 300, image: "posts/phone covers/high-quality.JPG" },
-                  { id: 2, name: "high-quality", price: 300, image: "posts/phone covers/high quality.JPG" },
-                  { id: 3, name: "Tom and Jerry", price: 300, image: "posts/phone covers/Tom and Jerry.JPG" },
-                  { id: 4, name: "3D", price: 200, image: "posts/phone covers/3D.JPG" }
-                  
-              ],
-              "Laptops": [
-                  { id: 1, name: "HP EliteBook", price: 29999, image: "posts/laptops/HP EliteBook 840 G6 8th Gen Intel Core i5-8365U 24GB RAM 256GB SSD 14″ Ultra Slim Laptop @ 29,999 only.jpg" },
-                  { id: 2, name: "Hp 840 G6 Intel Corei5 8th generation 8gbRAM  256 SSD , Backlit Keyboard, Fingerprint ", price: 29999, image: "posts/laptops/Hp 840 G6 Intel Corei5 8th generation.jpeg" },
-                  
-              ],
-            //   "Speakers": [
-            //       { id: 1, name: "Bose SoundLink Revolve", price: 200, image: "https://via.placeholder.com/200" },
-            //       { id: 2, name: "JBL Flip 5", price: 150, image: "https://via.placeholder.com/200" },
-            //       { id: 3, name: "Sony SRS-XB43", price: 180, image: "https://via.placeholder.com/200" }
-            //   ],
+  <div class="trust-bar">
+    <div class="trust-item"><i class="fas fa-truck"></i> Free Nairobi Delivery</div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> Secure Payments</div>
+    <div class="trust-item"><i class="fas fa-sync-alt"></i> 7-Day Returns</div>
+  </div>
 
-            //   "Smartphones": [
-            //       { id: 3, name: "iPhone 13", price: 1000, image: "https://via.placeholder.com/200" },
-            //       { id: 4, name: "Samsung Galaxy S21", price: 850, image: "https://via.placeholder.com/200" },
-            //       { id: 5, name: "Google Pixel 6", price: 900, image: "https://via.placeholder.com/200" }
-            //   ],
-            
-            //   "Headphones": [
-            //       { id: 9, name: "Sony WH-1000XM4", price: 350, image: "https://via.placeholder.com/200" },
-            //       { id: 10, name: "Bose QuietComfort 45", price: 400, image: "https://via.placeholder.com/200" },
-                
-            //   ],
-            //   "HDMI": [
-            //       { id: 11, name: "HDMI 2.0", price: 200, image: "https://via.placeholder.com/200" },
-            //       { id: 12, name: "HDMI 2.1", price: 250, image: "https://via.placeholder.com/200" },
-                
-            //   ]
-          };
+  <nav id="category-nav">
+    <ul>
+      <li onclick="scrollToCategory('Projectors')" class="active">Projectors</li>
+      <li onclick="scrollToCategory('projector screens')">Projector Screens</li>
+      <li onclick="scrollToCategory('phone covers')">Phone Covers</li>
+      <li onclick="scrollToCategory('Laptops')">Laptops</li>
+    </ul>
+  </nav>
 
+  <main id="products"></main>
 
-          let cart = [];
-          function showCart() {
-              document.getElementById('cart-page').style.display = 'block';
-              document.getElementById('cart-items').innerHTML = cart.map(item => `<li>${item.name} - KES ${item.price}</li>`).join('');
-          }
-          function hideCart() {
-              document.getElementById('cart-page').style.display = 'none';
-          }
-          function sendOrder() {
-              let message = "Hey, i would like to order:%0A" + cart.map(item => `${item.name} - KES ${item.price}`).join('%0A');
-              window.open(`https://wa.me/254714456925?text=${message}`, '_blank');
-          }
-          function toggleCategory(category) {
-              const sections = document.querySelectorAll('.category-section');
-              sections.forEach(section => {
-                  if (section.querySelector('h2').textContent === category) {
-                      if (section.classList.contains('show')) {
-                          section.classList.remove('show'); // Hide the section
-                          setTimeout(() => {
-                              section.style.display = 'none'; // Set display to none after animation
-                          }, 500); // Match the duration of the transition
-                      } else {
-                          section.style.display = 'block'; // Show the section
-                          setTimeout(() => {
-                              section.classList.add('show'); // Add class to trigger animation
-                          }, 10); // Small timeout to allow display to take effect
-                      }
-                  } else {
-                      section.classList.remove('show'); // Hide other sections
-                      section.style.display = 'none'; // Set display to none immediately
-                  }
-              });
-          }
-          function scrollCategories(amount) {
-            document.querySelector('.category-container').scrollBy({
-                left: amount,
-                behavior: 'smooth'
-            });
+  <div id="toast" class="toast">Item added to cart!</div>
+
+  <div id="cart-page">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <button onclick="sendOrder()">Order via WhatsApp</button>
+    <button onclick="hideCart()">Close</button>
+  </div>
+
+  <button id="cart-button" onclick="showCart()"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></button>
+
+  <a href="https://wa.me/254714456925?text=Hi%20Lianna%2C%20I%27m%20interested%20in%20your%20products" class="whatsapp-float" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    const productsContainer = document.getElementById("products");
+    const cartCount = document.getElementById("cart-count");
+
+    const products = {
+      "Projectors": [
+        { id: 1, name: "Hitachi CP-X995W Projector XGA 4500lumens", price: 30999, image: "posts/projectors/Hitachi CP-X995W Projector XGA Large Venue Projector 4500lumens.jpg" },
+        { id: 2, name: "Epson EB-S31 Multi-Media Projector 3200 Lumens", price: 39500, image: "posts/projectors/Epson EB-S31 Multi-Media Projector 3200 Lumens.png" },
+        { id: 3, name: "Epson Projector EB-S41 3300Lumens", price: 39500, image: "posts/projectors/Epson Projector EB-S41 Mobile Multimedia Projector-3300Lumens-3LCD-White.JPEG" },
+        { id: 4, name: "Epson EB-S05 SVGA 3LCD 3200 Lumens", price: 39000, image: "posts/projectors/Epson EB-S05 SVGA 3LCD 3200 Lumens Projector 3200 lumens.png" },
+        { id: 5, name: "Hitachi CP-DW10N Projector WXGA 2000 lumens", price: 20999, image: "posts/projectors/Hitachi CP-DW10N Projector WXGA Conference Room Projector 2000 lumens.jpg" },
+        { id: 6, name: "Sony VPL ES5 Conference room projector 2000 lumens", price: 20999, image: "posts/projectors/Sony VPL ES5 Conference room projector 2000 lumens.png" },
+        { id: 7, name: "Dell 3200MP Projector XGA 1,300 ANSI Lumens", price: 15999, image: "posts/projectors/Dell 3200MP Projector XGA Home Theater Projector 1,300 ANSI Lumens.png" },
+        { id: 8, name: "TOSHIBA TDP-S9 Projector DLP SVGA 1500 LUMENS", price: 15999, image: "posts/projectors/TOSHIBA TDP-S9  Projector DLP SVGA 1500 LUMENS.JPEG" },
+        { id: 9, name: "Hitachi CP-X308 Projector XGA 2600 lumens", price: 15999, image: "posts/projectors/Hitachi CP-X308 Projector XGA Conference Room Projector2600lumens.JPEG" },
+        { id: 10, name: "Christie Captiva DHD400S Projector 1080P (UST) Laser Projector", price: 45000, image: "posts/projectors/Christie_DHD400S_1080P_UST.png" },
+        { id: 11, name: "Optoma EP772 Projector XGA DLP 3100 Lumens", price: 31500, image: "posts/projectors/Optoma_EP772.JPEG" },
+        { id: 12, name: "Panasonic PT-LB51U Projector XGA 2000 Lumens", price: 15999, image: "posts/projectors/Dell 4320 Projector.JPEG" }
+      ],
+      "projector screens": [
+        { id: 13, name: "Trypod projector screensLW TPS 180T TRIPOD PROJECTOR SCREEN 180cm x 180cm", price: 10700, image: "posts/projector screens/Trypod projector screen.JPEG" },
+        { id: 14, name: "Trypod projector screensLW TPS 200T TRIPOD PROJECTOR SCREEN 200cm x 200cm", price: 13500, image: "posts/projector screens/Trypod projector screensLW TPS 200T.jpeg" },
+        { id: 15, name: "Trypod projector screensLW TPS 240T TRIPOD PROJECTOR SCREEN 240cm x 240cm", price: 16500, image: "posts/projector screens/Trypod projector screen.jpeg" },
+        { id: 16, name: "Motorized Projector Screen LW EPS 180E ELECTRIC PROJECTOR SCREEN 180cm x 180cm", price: 19000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
+        { id: 17, name: "Motorized Projector Screen LW EPS 200E ELECTRIC PROJECTOR SCREEN 200cm x 200cm", price: 20000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
+        { id: 18, name: "Motorized Projector Screen EPS 240E ELECTRIC PROJECTOR SCREEN 240cm x 240cm", price: 24000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
+        { id: 19, name: "Motorized Projector Screen TECHCOM ELECTRIC PROJECTOR SCREEN 300cm x 300cm", price: 31000, image: "posts/projector screens/ELECTRIC PROJECTOR SCREEN 180cm x 180cm.jpeg" },
+        { id: 20, name: "TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm", price: 9500, image: "posts/projector screens/TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm.jpeg" },
+        { id: 21, name: "LW MPS 180M MANUAL PROJECTOR SCREEN 180cm x 180cm", price: 10500, image: "posts/projector screens/TECHCOM MANUAL PROJECTOR SCREEN 145cm x 145cm.jpeg" }
+      ],
+      "phone covers": [
+        { id: 22, name: "high-quality", price: 300, image: "posts/phone covers/high-quality.JPG" },
+        { id: 23, name: "high-quality", price: 300, image: "posts/phone covers/high quality.JPG" },
+        { id: 24, name: "Tom and Jerry", price: 300, image: "posts/phone covers/Tom and Jerry.JPG" },
+        { id: 25, name: "3D", price: 200, image: "posts/phone covers/3D.JPG" }
+      ],
+      "Laptops": [
+        { id: 26, name: "HP EliteBook", price: 29999, image: "posts/laptops/HP EliteBook 840 G6 8th Gen Intel Core i5-8365U 24GB RAM 256GB SSD 14″ Ultra Slim Laptop @ 29,999 only.jpg" },
+        { id: 27, name: "Hp 840 G6 Intel Corei5 8th generation 8gbRAM  256 SSD , Backlit Keyboard, Fingerprint ", price: 29999, image: "posts/laptops/Hp 840 G6 Intel Corei5 8th generation.jpeg" }
+      ]
+    };
+
+    let cart = [];
+    function showCart() {
+      document.getElementById('cart-page').classList.add('open');
+      document.getElementById('cart-items').innerHTML = cart.map(item => `<li>${item.name} - KES ${item.price}</li>`).join('');
+    }
+    function hideCart() { document.getElementById('cart-page').classList.remove('open'); }
+    function sendOrder() {
+      let message = "Hey, I would like to order:%0A" + cart.map(item => `${item.name} - KES ${item.price}`).join('%0A');
+      window.open(`https://wa.me/254714456925?text=${message}`, '_blank');
+    }
+    function scrollToCategory(category) {
+      document.querySelectorAll('#category-nav li').forEach(li => li.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(`cat-${category}`).scrollIntoView({behavior: 'smooth'});
+    }
+    function displayProducts() {
+      productsContainer.innerHTML = "";
+      for (const category in products) {
+        const categorySection = document.createElement("div");
+        categorySection.classList.add("category-section");
+        categorySection.id = `cat-${category}`;
+        categorySection.innerHTML = `<h2>${category}</h2>`;
+        const productList = document.createElement("div");
+        productList.classList.add("product-list");
+        products[category].forEach(product => {
+          const productCard = document.createElement("div");
+          productCard.classList.add("product-card");
+          productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>KES ${product.price}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+          `;
+          productList.appendChild(productCard);
+        });
+        categorySection.appendChild(productList);
+        productsContainer.appendChild(categorySection);
+      }
+    }
+    function addToCart(productId) {
+      for (const category in products) {
+        const product = products[category].find(p => p.id === productId);
+        if (product) {
+          cart.push(product);
+          cartCount.textContent = cart.length;
+          showToast(`${product.name} added to cart!`);
+          break;
         }
-
-
-          function displayProducts() {
-              productsContainer.innerHTML = "";
-              let firstCategory = null; // Variable to hold the first category name
-              for (const category in products) {
-                  if (!firstCategory) {
-                      firstCategory = category; // Set the first category
-                  }
-                  const categorySection = document.createElement("div");
-                  categorySection.classList.add("category-section");
-                  categorySection.innerHTML = `<h2>${category}</h2>`;
-                
-                  const productList = document.createElement("div");
-                  productList.classList.add("product-list");
-                
-                  products[category].forEach(product => {
-                      const productCard = document.createElement("div");
-                      productCard.classList.add("product-card");
-                      productCard.innerHTML = `
-                          <img src="${product.image}" alt="${product.name}">
-                          <h3>${product.name}</h3>
-                          <p>Price: KES ${product.price}</p>
-                          <button onclick="addToCart(${product.id})">Add to Cart</button>
-                      `;
-                      productList.appendChild(productCard);
-                  });
-                
-                  categorySection.appendChild(productList);
-                  productsContainer.appendChild(categorySection);
-              }
-            
-              // Show the first category by default
-              if (firstCategory) {
-                  toggleCategory(firstCategory);
-              }
-          }
-
-          function addToCart(productId) {
-              for (const category in products) {
-                  const product = products[category].find(p => p.id === productId);
-                  if (product) {
-                      cart.push(product);
-                      cartCount.textContent = cart.length;
-                      showToast(`${product.name} added to cart!`); // Show toast instead of alert
-                      break;
-                  }
-              }
-          }
-
-          function showToast(message) {
-              const toast = document.getElementById("toast");
-              toast.textContent = message; // Set the message
-              toast.classList.add("show"); // Add the show class
-
-              // Remove the toast after 3 seconds
-              setTimeout(() => {
-                  toast.classList.remove("show"); // Remove the show class
-              }, 3000); // Duration for the toast to be visible
-          }
-        
-          displayProducts();
-      </script>
-  </body>
+      }
+    }
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 2000);
+    }
+    displayProducts();
+  </script>
+</body>
+</html>
